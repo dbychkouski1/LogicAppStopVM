@@ -5,7 +5,7 @@
         "accountName": {
             "type": "string"
         },
-        "credentialName": {
+        "credentialName1": {
             "type": "string"
         },
         "userName": {
