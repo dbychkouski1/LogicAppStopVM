@@ -1,0 +1,106 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "accountName": {
+            "type": "string"
+        },
+        "credentialName": {
+            "type": "string"
+        },
+        "userName": {
+            "type": "string"
+        },
+        "password": {
+            "type": "securestring"
+        },
+        "jobId": {
+            "type": "string"
+        },
+        "virtualMachineAdminUserName": {
+            "type": "string"
+        },
+        "virtualMachineAdminPassword": {
+            "type": "securestring"
+        },
+        "virtualMachineNamePrefix": {
+            "type": "string"
+        },
+        "SasToken": {
+            "type": "securestring"
+        },
+        "virtualMachineCount": {
+            "type": "int"
+        },
+        "dnsPrefixForPublicIP": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 14,
+            "defaultValue": "[uniqueString(resourceGroup().id)]"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "VM",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/dbychkouski1/LogicAppStopVM/master/VM.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "virtualMachineAdminUserName": {
+                        "value": "[parameters('virtualMachineAdminUserName')]"
+                    },
+                    "virtualMachineAdminPassword": {
+                        "value": "[parameters('virtualMachineAdminPassword')]"
+                    },
+                    "virtualMachineNamePrefix": {
+                        "value": "[parameters('virtualMachineNamePrefix')]"
+                    },
+                    "virtualMachineCount": {
+                        "value": "[parameters('virtualMachineCount')]"
+                    },
+                    "dnsPrefixForPublicIP": {
+                        "value": "[parameters('dnsPrefixForPublicIP')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "AutoAcc",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "VM"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/dbychkouski1/LogicAppStopVM/master/Automation.Json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "accountName": {
+                        "value": "[parameters('accountName')]"
+                    },
+                    "credentialName": {
+                        "value": "[parameters('credentialName')]"
+                    },
+                    "userName": {
+                        "value": "[parameters('userName')]"
+                    },
+                    "password": {
+                        "value": "[parameters('password')]"
+                    },
+                    "SasToken": {
+                        "value": "[parameters('SasToken')]"
+                    }
+                }
+            }
+        }
+    ]
+}
