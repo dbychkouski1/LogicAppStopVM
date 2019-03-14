@@ -14,9 +14,6 @@
         "password": {
             "type": "securestring"
         },
-        "jobId": {
-            "type": "string"
-        },
         "SasToken": {
             "type": "securestring"
         }
