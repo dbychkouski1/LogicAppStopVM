@@ -79,7 +79,38 @@
                 }
             }
         },
- 
+        {
+            "apiVersion": "2017-05-10",
+            "name": "logicApp",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "AutoAcc"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/dbychkouski1/LogicAppStopVM/master/LogicApp.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "connections_gmail_name": {
+                        "value": "[parameters('connections_gmail_name')]"
+                    },
+                    "connections_azureautomation_name": {
+                        "value": "[parameters('connections_azureautomation_name')]"
+                    },
+                    "workflows_stopvm_name": {
+                        "value": "[parameters('workflows_stopvm_name')]"
+                    },
+                    "SubscriptionID": {
+                        "value": "[parameters('SubscriptionID')]"
+                    },
+                    "accountName": {
+                        "value": "[parameters('accountName')]"
+                    }
+                }
+            }
+        },
         {
             "apiVersion": "2017-05-10",
             "name": "AutoAcc",
