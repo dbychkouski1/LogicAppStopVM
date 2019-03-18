@@ -31,9 +31,6 @@
         },
         "SubscriptionID": {
             "type": "string"
-        },
-        "accountName": {
-            "type": "string"
         }
     },
     "variables": {
@@ -163,12 +160,12 @@
                             "gmail": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
                                 "connectionName": "gmail",
-                                "id": "/subscriptions/(parameters('suscriptionid')/providers/Microsoft.Web/locations/westeurope/managedApis/gmail"
+                                "id": "/subscriptions/(parameters('SubscriptionID')/providers/Microsoft.Web/locations/westeurope/managedApis/gmail"
                             },
                             "azureautomation": {
                                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureautomation_name'))]",
                                 "connectionName": "azureautomation",
-                                "id": "/subscriptions/(parameters('suscriptionid')/providers/Microsoft.Web/locations/westeurope/managedApis/azureautomation"
+                                "id": "/subscriptions/(parameters('SubscriptionID')/providers/Microsoft.Web/locations/westeurope/managedApis/azureautomation"
                             }
                         }
                     }
