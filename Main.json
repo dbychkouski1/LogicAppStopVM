@@ -116,8 +116,7 @@
             "name": "logicApp",
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
-                "AutoAcc",
-                "VM"
+                "AutoAcc"
             ],
             "properties": {
                 "mode": "Incremental",
