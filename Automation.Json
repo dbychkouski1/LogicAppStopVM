@@ -103,6 +103,95 @@
             "dependsOn": []
         },
         {
+            "type": "Microsoft.Logic/workflows",
+            "name": "[parameters('workflows_stopvm_name')]",
+            "apiVersion": "2017-07-01",
+            "location": "westeurope",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_new_email_arrives": {
+                            "recurrence": {
+                                "frequency": "Minute",
+                                "interval": 3
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['gmail']['connectionId']"
+                                    }
+                                },
+                                "method": "get",
+                                "path": "/Mail/OnNewEmail",
+                                "queries": {
+                                    "fetchOnlyWithAttachments": false,
+                                    "importance": "All",
+                                    "includeAttachments": false,
+                                    "label": "INBOX",
+                                    "starred": "All",
+                                    "subject": "STOPVM"
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Create_job": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['azureautomation']['connectionId']"
+                                    }
+                                },
+                                "method": "put",
+
+                                "path" :"/subscriptions/d44df320-a45f-4c85-a870-4ff0a789595c/resourceGroups/logic-aapp-stop/providers/Microsoft.Automation/automationAccounts/task9auto/jobs",
+                                "queries": {
+                                    "runbookName": "StopVM",
+                                    "wait": false,
+                                    "x-ms-api-version": "2015-10-31"
+                                }
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "gmail": {
+                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
+                                "connectionName": "gmail",
+                                "id": "/subscriptions/(parameters('SubscriptionID')/providers/Microsoft.Web/locations/westeurope/managedApis/gmail"
+                            },
+                            "azureautomation": {
+                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_azureautomation_name'))]",
+                                "connectionName": "azureautomation",
+                                "id": "/subscriptions/(parameters('SubscriptionID')/providers/Microsoft.Web/locations/westeurope/managedApis/azureautomation"
+                            }
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                               "[concat('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
+                "[concat('Microsoft.Web/connections', parameters('connections_azureautomation_name'))]"
+            ]
+        }
+        {
             "type": "Microsoft.Web/connections",
             "dependsOn" : "[resourceId('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
             "name": "[parameters('connections_azureautomation_name')]",
