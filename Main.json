@@ -81,38 +81,6 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "AutoAcc",
-            "type": "Microsoft.Resources/deployments",
-            "dependsOn": [
-                "VM"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/dbychkouski1/LogicAppStopVM/master/Automation.Json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "accountName": {
-                        "value": "[parameters('accountName')]"
-                    },
-                    "credentialName": {
-                        "value": "[parameters('credentialName')]"
-                    },
-                    "userName": {
-                        "value": "[parameters('userName')]"
-                    },
-                    "password": {
-                        "value": "[parameters('password')]"
-                    },
-                    "SasToken": {
-                        "value": "[parameters('SasToken')]"
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "2017-05-10",
             "name": "logicApp",
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
@@ -142,6 +110,39 @@
                     }
                 }
             }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "AutoAcc",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "VM"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/dbychkouski1/LogicAppStopVM/master/Automation.Json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "accountName": {
+                        "value": "[parameters('accountName')]"
+                    },
+                    "credentialName": {
+                        "value": "[parameters('credentialName')]"
+                    },
+                    "userName": {
+                        "value": "[parameters('userName')]"
+                    },
+                    "password": {
+                        "value": "[parameters('password')]"
+                    },
+                    "SasToken": {
+                        "value": "[parameters('SasToken')]"
+                    }
+                }
+            }
         }
+
     ]
 }
