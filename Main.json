@@ -108,7 +108,6 @@
                     "SubscriptionID": {
                         "value": "[parameters('SubscriptionID')]"
                     },
-
                     "credentialName": {
                         "value": "[parameters('credentialName')]"
                     },
