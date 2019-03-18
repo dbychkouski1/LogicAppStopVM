@@ -2,9 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "accountName": {
-            "type": "string"
-        },
         "credentialName": {
             "type": "string"
         },
@@ -36,19 +33,19 @@
             "defaultValue": "[uniqueString(resourceGroup().id)]"
         },
         "connections_gmail_name": {
-            "type": "String"
+            "type": "string"
         },
         "connections_azureautomation_name": {
-            "type": "String"
+            "type": "string"
         },
         "workflows_stopvm_name": {
-            "type": "String"
+            "type": "string"
         },
         "SubscriptionID": {
-            "type": "String"
+            "type": "string"
         },
         "accountName": {
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
