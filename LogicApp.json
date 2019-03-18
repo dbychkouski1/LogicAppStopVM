@@ -3,22 +3,22 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "connections_gmail_name": {
-
-            "type": "String"
+            "defaultValue": "gmail",
+            "type": "string"
         },
         "connections_azureautomation_name": {
-
-            "type": "String"
+            "defaultValue": "azureautomation",
+            "type": "string"
         },
         "workflows_stopvm_name": {
-     
-            "type": "String"
+            "defaultValue": "stopvm",
+            "type": "string"
         },
         "SubscriptionID": {
-            "type": "String"
+            "type": "string"
         },
         "accountName": {
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
