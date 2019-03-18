@@ -17,7 +17,7 @@
     "dnsPrefixForPublicIP": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 14,
+      "maxLength": 15,
       "defaultValue": "[uniqueString(resourceGroup().id)]"    
     }
   },
