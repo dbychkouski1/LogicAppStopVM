@@ -103,6 +103,28 @@
             "dependsOn": []
         },
         {
+            "type": "Microsoft.Web/connections",
+            "dependsOn" : "[resourceId('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
+            "name": "[parameters('connections_azureautomation_name')]",
+            "apiVersion": "2016-06-01",
+            "location": "westeurope",
+            "scale": null,
+            "properties": {
+                "displayName": "live.com#dimabyck@gmail.com",
+                "CustomParameterValues": {
+                    "ClientID": "f92d98be-06a3-4ae4-8b23-39e9c7d1f1a0",
+                    "Tenant": "546a2d5b-e66c-476c-91fc-010da4e06b9c",
+                    "ResourceUri": "https://prod-37.westeurope.logic.azure.com:443/workflows/1b4a8c8790814bbcade7b83129cc579d",
+                    "ClientSecret": "jNevkwN4LsbBpqo5qHXaPO8ASQX2+HS9gKs8+H/lSg0="
+                
+                },
+                "api": {
+                    "id": "[concat('/subscriptions/d44df320-a45f-4c85-a870-4ff0a789595c/providers/Microsoft.Web/locations/westeurope/managedApis/', parameters('connections_azureautomation_name'))]"
+                }
+            },
+            "dependsOn": []
+        },
+        {
             "type": "Microsoft.Logic/workflows",
             "name": "[parameters('workflows_stopvm_name')]",
             "apiVersion": "2017-07-01",
@@ -157,7 +179,7 @@
                                     }
                                 },
                                 "method": "put",
-
+                                
                                 "path" :"/subscriptions/d44df320-a45f-4c85-a870-4ff0a789595c/resourceGroups/logic-aapp-stop/providers/Microsoft.Automation/automationAccounts/task9auto/jobs",
                                 "queries": {
                                     "runbookName": "StopVM",
@@ -187,31 +209,9 @@
                 }
             },
             "dependsOn": [
-                               "[concat('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
+                "[concat('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
                 "[concat('Microsoft.Web/connections', parameters('connections_azureautomation_name'))]"
             ]
-        }
-        {
-            "type": "Microsoft.Web/connections",
-            "dependsOn" : "[resourceId('Microsoft.Web/connections', parameters('connections_gmail_name'))]",
-            "name": "[parameters('connections_azureautomation_name')]",
-            "apiVersion": "2016-06-01",
-            "location": "westeurope",
-            "scale": null,
-            "properties": {
-                "displayName": "live.com#dimabyck@gmail.com",
-                "CustomParameterValues": {
-                    "ClientID": "f92d98be-06a3-4ae4-8b23-39e9c7d1f1a0",
-                    "Tenant": "546a2d5b-e66c-476c-91fc-010da4e06b9c",
-                    "ResourceUri": "https://prod-37.westeurope.logic.azure.com:443/workflows/1b4a8c8790814bbcade7b83129cc579d",
-                    "ClientSecret": "jNevkwN4LsbBpqo5qHXaPO8ASQX2+HS9gKs8+H/lSg0="
-                
-                },
-                "api": {
-                    "id": "[concat('/subscriptions/d44df320-a45f-4c85-a870-4ff0a789595c/providers/Microsoft.Web/locations/westeurope/managedApis/', parameters('connections_azureautomation_name'))]"
-                }
-            },
-            "dependsOn": []
         }
         
     ]
