@@ -36,15 +36,12 @@
             "defaultValue": "[uniqueString(resourceGroup().id)]"
         },
         "connections_gmail_name": {
-     
             "type": "String"
         },
         "connections_azureautomation_name": {
-
             "type": "String"
         },
         "workflows_stopvm_name": {
-     
             "type": "String"
         },
         "SubscriptionID": {
@@ -132,22 +129,19 @@
                 },
                 "parameters": {
                     "connections_gmail_name": {
-                   
-                        "type": "String"
+                        "value": "[parameters('connections_gmail_name')]"
                     },
                     "connections_azureautomation_name": {
-         
-                        "type": "String"
+                        "value": "[parameters('connections_azureautomation_name')]"
                     },
                     "workflows_stopvm_name": {
-                     
-                        "type": "String"
+                        "value": "[parameters('workflows_stopvm_name')]"
                     },
                     "SubscriptionID": {
-                        "type": "String"
+                        "value": "[parameters('SubscriptionID')]"
                     },
                     "accountName": {
-                        "type": "String"
+                        "value": "[parameters('accountName')]"
                     }
                 }
             }
