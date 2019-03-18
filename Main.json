@@ -34,6 +34,24 @@
             "minLength": 1,
             "maxLength": 14,
             "defaultValue": "[uniqueString(resourceGroup().id)]"
+        },
+        "connections_gmail_name": {
+            "defaultValue": "gmail",
+            "type": "String"
+        },
+        "connections_azureautomation_name": {
+            "defaultValue": "azureautomation",
+            "type": "String"
+        },
+        "workflows_stopvm_name": {
+            "defaultValue": "stopvm",
+            "type": "String"
+        },
+        "SubscriptionID": {
+            "type": "String"
+        },
+        "accountName": {
+            "type": "String"
         }
     },
     "variables": {},
@@ -95,6 +113,41 @@
                     },
                     "SasToken": {
                         "value": "[parameters('SasToken')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "logicApp",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "AutoAcc"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/dbychkouski1/LogicAppStopVM/master/LogicApp.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "connections_gmail_name": {
+                        "defaultValue": "gmail",
+                        "type": "String"
+                    },
+                    "connections_azureautomation_name": {
+                        "defaultValue": "azureautomation",
+                        "type": "String"
+                    },
+                    "workflows_stopvm_name": {
+                        "defaultValue": "stopvm",
+                        "type": "String"
+                    },
+                    "SubscriptionID": {
+                        "type": "String"
+                    },
+                    "accountName": {
+                        "type": "String"
                     }
                 }
             }
