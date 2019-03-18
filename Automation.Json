@@ -211,7 +211,7 @@
                     "id":  "[concat('/subscriptions/d44df320-a45f-4c85-a870-4ff0a789595c/providers/Microsoft.Web/locations/westeurope/managedApis/', parameters('connections_gmail_name'))]"
                 }
             },
-            "dependsOn": []
+            "dependsOn": [ ]
         }
     ]
 }
